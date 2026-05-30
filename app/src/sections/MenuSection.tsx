@@ -22,6 +22,7 @@ const CATEGORY_ICONS: Record<Category, React.ReactNode> = {
 
 export default function MenuSection({ items }: MenuSectionProps) {
   const [activeCategory, setActiveCategory] = useState<Category | 'all'>('all');
+  const [modalImage, setModalImage] = useState<string | null>(null);
 
   // Debug: ensure we actually have menu items and matching categories
   useEffect(() => {
@@ -66,6 +67,14 @@ export default function MenuSection({ items }: MenuSectionProps) {
   const handleCategoryChange = (category: Category | 'all') => {
     setActiveCategory(category);
   };
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setModalImage(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   return (
     <section
@@ -131,9 +140,23 @@ export default function MenuSection({ items }: MenuSectionProps) {
               item={item}
               index={index}
               isVisible={isVisible}
+              onOpenImage={(src: string) => setModalImage(src)}
             />
           ))}
         </div>
+        {/* Image Modal */}
+        {modalImage && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+            onClick={() => setModalImage(null)}
+          >
+            <div className="max-w-[95vw] max-h-[95vh]" onClick={(e) => e.stopPropagation()}>
+              <img src={modalImage} alt="Full item" className="w-full h-full object-contain rounded" />
+            </div>
+          </div>
+        )}
 
         {filteredItems.length === 0 && (
           <div className="text-center py-16">
@@ -150,10 +173,12 @@ function MenuCard({
   item,
   index,
   isVisible,
+  onOpenImage,
 }: {
   item: MenuItem;
   index: number;
   isVisible: boolean;
+  onOpenImage?: (src: string) => void;
 }) {
   const categoryLabel = CATEGORY_CONFIG.find((c) => c.id === item.category)?.label || item.category;
 
@@ -173,13 +198,20 @@ function MenuCard({
 
       {/* Item Image */}
       {item.imageUrl ? (
-        <img
-          src={item.imageUrl}
-          alt={item.name}
-          className="w-full h-28 rounded-xl object-cover border border-custom bg-cream/50 mb-3"
-        />
+        <button
+          type="button"
+          onClick={() => onOpenImage && onOpenImage(item.imageUrl!)}
+          className="w-full p-0 mb-3 rounded-xl overflow-hidden"
+          aria-label={`View ${item.name} image`}
+        >
+          <img
+            src={item.imageUrl}
+            alt={item.name}
+            className="w-full h-36 rounded-xl object-contain border border-custom bg-cream/50"
+          />
+        </button>
       ) : (
-        <div className="w-full h-28 rounded-xl border border-dashed border-custom bg-cream/30 mb-3" />
+        <div className="w-full h-36 rounded-xl border border-dashed border-custom bg-cream/30 mb-3" />
       )}
 
       {/* Item Name */}
