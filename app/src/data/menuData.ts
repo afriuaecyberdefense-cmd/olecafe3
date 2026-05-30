@@ -73,7 +73,7 @@ export const DEFAULT_MENU_ITEMS: MenuItem[] = [
   { id: 'ms-4', name: 'Oreo Milkshake', description: 'Oreo milkshake', price: 27, category: 'milkshake', imageUrl: '/images/mojito-and-milshake/oreo.jpg' },
 
   // Non-Coffee
-  { id: 'nc-1', name: 'Orange Juice', description: 'Orange juice', price: 20, category: 'non-coffee', imageUrl: '/images/mojito-and-milshake/oranje.jpg' },
+  { id: 'nc-1', name: 'Orange Juice', description: 'Orange juice', price: 20, category: 'non-coffee', imageUrl: '/images/mojito-and-milshake/orange-juice.jpg' },
 
   // Matcha (updated)
   { id: 'ma-1', name: 'Matcha Spanish Matcha', description: 'Spanish matcha', price: 24, category: 'matcha', imageUrl: '/images/matcha/spanish-matcha.jpg' },
@@ -116,7 +116,7 @@ export const CATEGORY_CONFIG: { id: Category; label: string }[] = [
 
 const STORAGE_KEY = 'olecafe_menu_items';
 const STORAGE_VERSION_KEY = 'olecafe_menu_version';
-const MENU_VERSION = '2026-05-30-v4';
+const MENU_VERSION = '2026-05-30-v5';
 
 export function loadMenuItems(): MenuItem[] {
   try {
