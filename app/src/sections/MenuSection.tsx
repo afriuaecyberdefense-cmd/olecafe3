@@ -152,8 +152,16 @@ export default function MenuSection({ items }: MenuSectionProps) {
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
             onClick={() => setModalImage(null)}
           >
-            <div className="max-w-[95vw] max-h-[95vh]" onClick={(e) => e.stopPropagation()}>
-              <img src={modalImage} alt="Full item" className="w-full h-full object-contain rounded" />
+            <div
+              className="max-w-[95vw] max-h-[95vh] overflow-auto"
+              style={{ touchAction: 'pan-y' }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={modalImage}
+                alt="Full item"
+                className="max-w-none max-h-[90vh] rounded block mx-auto"
+              />
             </div>
           </div>
         )}
