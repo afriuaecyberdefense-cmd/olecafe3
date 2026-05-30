@@ -107,7 +107,7 @@ export default function Contact() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          <p className="font-medium text-text-primary text-base mb-4">Follow us on Instagram & Snapchat</p>
+          <p className="font-medium text-text-primary text-base mb-4">Follow us on Instagram & TikTok</p>
           <div className="inline-block bg-white rounded-2xl border-2 border-custom p-4 card-shadow">
             <div className="w-32 h-32 bg-cream rounded-xl flex items-center justify-center">
               <div className="text-center">
@@ -116,7 +116,7 @@ export default function Contact() {
               </div>
             </div>
           </div>
-          <p className="text-text-secondary text-xs mt-3">Scan to follow @olecafe.ae (Instagram) or add us on Snapchat: olecafe.ae</p>
+          <p className="text-text-secondary text-xs mt-3">Scan to follow @olecafe.ae (Instagram) or follow us on TikTok: @olecafe.ae</p>
         </div>
       </div>
     </section>

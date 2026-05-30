@@ -76,7 +76,7 @@ export default function Navigation({ onAdminClick }: NavigationProps) {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}>
           <img
-            src="/imgaes/olecafe logo.jpeg"
+            src="/images/olecafe.jpeg"
             alt="Ole Cafe logo"
             className="h-8 w-8 rounded-full object-cover"
           />

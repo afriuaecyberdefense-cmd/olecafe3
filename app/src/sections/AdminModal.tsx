@@ -38,7 +38,6 @@ export default function AdminModal({
     imageUrl: '' as string,
   });
 
-  const [imagePreview, setImagePreview] = useState<string>('');
   const [success, setSuccess] = useState('');
 
   const handleLogin = useCallback(() => {
@@ -78,7 +77,6 @@ export default function AdminModal({
 
     onAddItem(newItem);
     setFormData({ name: '', description: '', price: '', category: 'hot-drinks' as Category, imageUrl: '' as string });
-    setImagePreview('');
     setSuccess('Item added successfully!');
     setTimeout(() => setSuccess(''), 3000);
   }, [formData, onAddItem]);
@@ -302,52 +300,13 @@ export default function AdminModal({
                       Item Image
                     </label>
 
-                    {imagePreview && (
-                      <div className="mb-3 flex items-center gap-3">
-                        <img
-                          src={imagePreview}
-                          alt="Preview"
-                          className="w-16 h-16 rounded-xl object-cover border border-custom bg-cream/50"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setImagePreview('');
-                            setFormData((prev) => ({ ...prev, imageUrl: '' as string }));
-                          }}
-                          className="text-xs text-burgundy-dark hover:text-burgundy font-semibold"
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    )}
-
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (!file) return;
-
-                        if (file.size > 2 * 1024 * 1024) {
-                          setError('Image must be smaller than 2MB');
-                          return;
-                        }
-
-                        const reader = new FileReader();
-                        reader.onload = () => {
-                          const result = String(reader.result || '');
-                          setImagePreview(result);
-                          setFormData((prev) => ({ ...prev, imageUrl: result }));
-                          setError('');
-                        };
-                        reader.readAsDataURL(file);
-                      }}
-                      className="w-full h-12 px-4 rounded-xl border border-custom bg-cream/50 text-text-primary text-sm focus:outline-none focus:border-burgundy focus:ring-2 focus:ring-burgundy/10 transition-all file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-burgundy/10 file:text-burgundy"
-                    />
+                    <div className="text-xs text-text-secondary bg-cream/50 border border-custom/50 rounded-xl px-3 py-2">
+                      Item images are locked and cannot be changed.
+                    </div>
                   </div>
 
                   <button
+
                     onClick={handleSubmit}
                     className="w-full h-12 bg-champagne text-burgundy-dark font-semibold text-sm rounded-xl hover:bg-champagne-light transition-colors active:scale-[0.97] flex items-center justify-center gap-2"
                   >
